@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects - Ali Maaouia</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="custom-cursor"></div>
+    <div class="container">
+        <h4>Ali Maaouia</h4>
+        <div class="menu">
+            <a href="index.html">Home/About</a>
+            <a href="project.html" class="active">Projects</a>
+            <a href="social.html">Social</a>
+            <a href="contact.html">Contact</a>
+        </div>
+    </div>
+
+    <div class="content">
+        <section id="projects">
+            <h4 class="contact-title">Projects</h4>
+            <p class="contact-info">Here are some projects I have created:</p>
+            <div class="status-filter">
+                <span>Status Filter:</span>
+                <button id="all-btn" class="status-btn active">All</button>
+                <button id="active-btn" class="status-btn">Active</button>
+                <button id="paused-btn" class="status-btn">Paused</button>
+                <button id="completed-btn" class="status-btn">Completed</button>
+            </div>
+            <ul id="project-list">
+               
+            </ul>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Ali Maaouia. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const projectList = document.getElementById('project-list');
+            const allBtn = document.getElementById('all-btn');
+            const activeBtn = document.getElementById('active-btn');
+            const pausedBtn = document.getElementById('paused-btn');
+            const completedBtn = document.getElementById('completed-btn');
+
+            //all projects
+            const projects = [
+                {
+                    name: 'BeanBrain',
+                    description: 'Made in 2023, BeanBrain was a game I made as a massive project lasting over 2 months for my game programming class',
+                    status: 'Paused',
+                    date: '2023-01-01'
+                },
+                {
+                    name: 'Personal Portfolio Website',
+                    description: 'This website made in 2024 is a project for clc 12 aimed at improving programming skills.',
+                    status: 'Active',
+                    date: '2024-01-01'
+                },
+                {
+                    name: 'Research Paper on AI in Criminal Justice Systems',
+                    description: 'A university-level research paper on the implementation of AI in criminal justice systems made in 2024.',
+                    status: 'Active',
+                    date: '2024-02-01'
+                },
+                {
+                    name: 'Discord Server Design',
+                    description: 'A Discord server completely designed by myself in 2021, still up and running today.',
+                    status: 'Paused',
+                    date: '2021-01-01'
+                },
+                {
+                    name: 'Small Java Programs',
+                    description: 'Includes connect four, Horse Race, and blackjack simulation made in 2023.',
+                    status: 'Completed',
+                    date: '2023-02-01'
+                },
+                {
+                    name: '2020 Minecraft Textured Skin',
+                    description: 'First textured skin created in Minecraft that led to the creation of a texture pack revolving around the skin.',
+                    status: 'Completed',
+                    date: '2020-01-01'
+                }
+        
+            ];
+
+          
+            function renderProjects(projectArray) {
+                projectList.innerHTML = '';
+                projectArray.sort((a, b) => new Date(b.date) - new Date(a.date)); // Sort projects by date
+                projectArray.forEach(project => {
+                    const listItem = document.createElement('li');
+                    listItem.innerHTML = `
+                        <div class="project-details">
+                            <h3>${project.name}</h3>
+                            <p>${project.description}</p>
+                        </div>
+                        <div class="project-status ${project.status.toLowerCase()}">${project.status}</div>
+                    `;
+                    projectList.appendChild(listItem);
+                });
+            }
+
+           
+            renderProjects(projects);
+
+           
+            allBtn.addEventListener('click', function () {
+                renderProjects(projects);
+                document.querySelectorAll('.status-btn').forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+            });
+
+            activeBtn.addEventListener('click', function () {
+                const activeProjects = projects.filter(project => project.status.toLowerCase() === 'active');
+                renderProjects(activeProjects);
+                document.querySelectorAll('.status-btn').forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+            });
+
+            pausedBtn.addEventListener('click', function () {
+                const pausedProjects = projects.filter(project => project.status.toLowerCase() === 'paused');
+                renderProjects(pausedProjects);
+                document.querySelectorAll('.status-btn').forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+            });
+
+            completedBtn.addEventListener('click', function () {
+                const completedProjects = projects.filter(project => project.status.toLowerCase() === 'completed');
+                renderProjects(completedProjects);
+                document.querySelectorAll('.status-btn').forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        
+    </script>
+</body>
+</html>
